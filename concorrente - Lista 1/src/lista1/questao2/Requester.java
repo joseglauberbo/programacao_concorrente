@@ -11,6 +11,7 @@ public class Requester {
 	}
     
     public String reliableRequest() {
+    	
     	return httpRequester.getPrimeiro();
     }
  

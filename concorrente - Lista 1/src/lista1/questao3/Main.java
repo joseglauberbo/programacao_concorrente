@@ -1,4 +1,4 @@
-package lista1.questao2;
+package lista1.questao3;
 
 
 
@@ -15,8 +15,8 @@ public class Main {
 		} 
 		
 		System.out.println(req.reliableRequest());
+		System.out.println(req.retorno());
       
 	}
-
-
+	
 }
