@@ -1,9 +1,5 @@
 package lista1.questao1;
 
-
-
-
-
 import java.util.ArrayList;
 
 public class Canal implements Channel, Runnable{
@@ -78,11 +74,5 @@ public class Canal implements Channel, Runnable{
 		this.putMessage("message");
 		System.out.println(this.takeMessage());
 	}
-
-
-
-
-
-
-
+	
 }
