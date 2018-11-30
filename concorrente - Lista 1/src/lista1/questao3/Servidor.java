@@ -33,9 +33,9 @@ public class Servidor implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} 
+		
 		System.out.print("servidor: ");
 		System.out.println(HTTP.request(getNome()));
-		
-		
+
 	}
 }

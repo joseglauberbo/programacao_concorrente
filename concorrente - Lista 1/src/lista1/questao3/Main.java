@@ -7,6 +7,7 @@ public class Main {
 	public static void main(String args[]) throws InterruptedException {
 		
 		Requester req = new Requester();
+		
 		try {
 			Thread.currentThread();
 			Thread.sleep(1001);
@@ -14,7 +15,7 @@ public class Main {
 			e.printStackTrace();
 		} 
 		
-		System.out.println(req.reliableRequest());
+		req.reliableRequest();
 		System.out.println(req.retorno());
       
 	}
