@@ -15,9 +15,8 @@ public class Main {
 			e.printStackTrace();
 		} 
 		
-		req.reliableRequest();
-		System.out.println(req.retorno());
-      
+		String result = req.reliableRequest();
+		System.out.println(req.retorno(result, req.getTime()));
 	}
 	
 }
