@@ -21,12 +21,19 @@ public class Requester {
 	
 	}
 	
-    public String reliableRequest() {
+    public String reliableRequest() throws InterruptedException {
     
     	
     	long start = System.currentTimeMillis();
     	this.createThread();
 		long elapsed = System.currentTimeMillis() - start;
+		
+		try {
+			Thread.currentThread();
+			Thread.sleep(1001);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		time = elapsed;
 		System.out.println(time);
@@ -35,8 +42,7 @@ public class Requester {
     
     public String retorno(String result, long time) {
     		
-    		System.out.println(result);
-    		if(time < 5) {
+    		if(time < 2000) {
     			return result;
     		} else {
     			return "tempo ultrapassado";

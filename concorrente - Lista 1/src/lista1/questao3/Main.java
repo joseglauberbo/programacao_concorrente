@@ -6,16 +6,10 @@ public class Main {
 
 	public static void main(String args[]) throws InterruptedException {
 		
-		Requester req = new Requester();
-		
-		try {
-			Thread.currentThread();
-			Thread.sleep(1001);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} 
+		Requester req = new Requester(); 
 		
 		String result = req.reliableRequest();
+		//req.retorno(result, req.getTime());
 		System.out.println(req.retorno(result, req.getTime()));
 	}
 	
