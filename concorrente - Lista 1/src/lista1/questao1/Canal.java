@@ -2,7 +2,7 @@ package lista1.questao1;
 
 import java.util.ArrayList;
 
-public class Canal implements Channel, Runnable{
+public class Canal implements Channel{
 
 	private int tamanho;
 	private ArrayList<String> msgs;
@@ -18,7 +18,6 @@ public class Canal implements Channel, Runnable{
 			while(this.getMsgs().size() >= this.tamanho) {
 				try {
 					System.out.println("esperando canal cheio");
-					System.out.println(this.getMsgs().size());
 					this.msgs.wait();
 				} catch(InterruptedException e) {}
 			}
@@ -70,12 +69,5 @@ public class Canal implements Channel, Runnable{
 	}
 
 
-	@Override
-	public void run() {
-		System.out.println("0");
-		this.putMessage("dedo no rabo");
-		this.putMessage("message");
-		System.out.println(this.takeMessage());
-	}
 	
 }

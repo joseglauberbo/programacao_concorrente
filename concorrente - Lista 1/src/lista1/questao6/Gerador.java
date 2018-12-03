@@ -20,9 +20,7 @@ public class Gerador implements Runnable {
                
             	 while (this.data.isFull()) {
                      try {
-                    	 System.out.println("esta cheio");
-                         //the buffer is empty
-                         //wait until something be produced
+                    	
                          this.data.wait();
                      } catch (InterruptedException e) { }
                  }
@@ -31,7 +29,7 @@ public class Gerador implements Runnable {
             	
                 int produced = this.random.nextInt(1000);
                 this.data.put(produced);
-                System.err.println("value produced: " + produced);
+                System.err.println("valor gerado: " + produced);
               
             	try {
         			Thread.currentThread();

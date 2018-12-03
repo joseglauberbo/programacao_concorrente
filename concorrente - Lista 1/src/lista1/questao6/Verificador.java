@@ -16,9 +16,7 @@ public class Verificador implements Runnable{
              synchronized (this.data) {
                  while (this.data.isEmpty()) {
                      try {
-                    	 System.out.println("esta vazio");
-                         //the buffer is empty
-                         //wait until something be produced
+                
                          this.data.wait();
                      } catch (InterruptedException e) { }
                  }
@@ -26,7 +24,7 @@ public class Verificador implements Runnable{
                  
                  if(taken  % 2 == 0) {
                  
-                	 System.err.println("value verificado: " + taken);
+                	 System.err.println("valor verificado: " + taken);
                 	
              		
                 	 
