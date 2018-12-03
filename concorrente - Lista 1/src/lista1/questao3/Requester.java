@@ -45,7 +45,7 @@ public class Requester {
     		if(time < 2000) {
     			return result;
     		} else {
-    			return "tempo ultrapassado";
+    			return "Erro: tempo ultrapassado";
     		}	
     }
  

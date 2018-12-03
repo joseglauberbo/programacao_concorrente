@@ -14,37 +14,40 @@ public class Canal implements Channel, Runnable{
 
 	@Override
 	public  void  putMessage(String message) {
-		synchronized (message) {
+		synchronized (this.msgs) {
 			while(this.getMsgs().size() >= this.tamanho) {
 				try {
 					System.out.println("esperando canal cheio");
 					System.out.println(this.getMsgs().size());
-					message.wait();
+					this.msgs.wait();
 				} catch(InterruptedException e) {}
 			}
 
 			this.msgs.add(message);
-			System.out.println("Add ao canal na posicao" + this.getMsgs().size() + this.msgs);
-			message.notifyAll();
+			System.out.println("Mensagem adicionada ao canal: " + message);
+			this.msgs.notifyAll();
 		}
 	}
 
 	@Override
-	public  synchronized String takeMessage() {
-
+	public  String takeMessage() {
+		synchronized (this.msgs) {
+			
+		
 		while(this.getMsgs().isEmpty()) {
 			try {
 				System.out.println("canal vazio, esperando!");
-				this.wait();
+				this.msgs.wait();
 			} catch(InterruptedException e) {}
 		}
 		
 		String aux = this.getMsgs().get(0);
 		this.msgs.remove(0);
-		this.notifyAll();
-		System.out.println(aux + this.msgs);
+		this.msgs.notifyAll();
+		System.out.println( "Mensagem retirada do canal: " +aux);
 		return aux;
 	}
+}	
 
 
 	public int getTamanho() {

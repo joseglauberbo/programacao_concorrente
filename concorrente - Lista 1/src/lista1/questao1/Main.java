@@ -11,7 +11,7 @@ public class Main {
 			@Override
 			public synchronized void run() 
 			{ 
-				//canal.putMessage("deus");
+				
 				canal.putMessage("estou entrando t1 1");
 
 
@@ -24,7 +24,6 @@ public class Main {
 			public synchronized void run() 
 			{ 
 				canal.putMessage("estou entrando t2 1");
-				//canal.putMessage("estou entrando t2 2");
 				canal.takeMessage();
 				canal.takeMessage();
 			} 
