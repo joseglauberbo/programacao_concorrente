@@ -1,9 +1,12 @@
 package lista1.questao3;
 
+import java.util.Random;
+
 public class Requester {
 
 	private HTTPRequest httpRequester = new HTTPRequest();
 	private long time = 0;
+	private Random random = new Random();
 	
 	public long getTime() {
 		return time;
@@ -26,14 +29,15 @@ public class Requester {
     	
     	long start = System.currentTimeMillis();
     	this.createThread();
-		long elapsed = System.currentTimeMillis() - start;
-		
-		try {
+    	try {
 			Thread.currentThread();
-			Thread.sleep(1001);
+			Thread.sleep(random.nextInt(1001));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		long elapsed = System.currentTimeMillis() - start;
+		
+		
 		
 		time = elapsed;
 		System.out.println(time);

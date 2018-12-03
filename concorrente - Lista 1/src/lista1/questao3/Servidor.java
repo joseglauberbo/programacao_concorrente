@@ -6,7 +6,6 @@ public class Servidor implements Runnable{
 	
 	private String nome;
 	private HTTPRequest HTTP;
-	private Random random = new Random();
 	
 	public Servidor(String nome, HTTPRequest httpRequest) {
 	
@@ -27,12 +26,6 @@ public class Servidor implements Runnable{
 	
 	@Override
 	public void run() {
-		try {
-			Thread.currentThread();
-			Thread.sleep(random.nextInt(1000));
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} 
 		
 		HTTP.request(getNome());
 

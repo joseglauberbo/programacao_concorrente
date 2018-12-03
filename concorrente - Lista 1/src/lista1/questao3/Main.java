@@ -1,7 +1,5 @@
 package lista1.questao3;
 
-
-
 public class Main {
 
 	public static void main(String args[]) throws InterruptedException {
