@@ -27,12 +27,6 @@ public class Servidor implements Runnable{
 	
 	@Override
 	public void run() {
-		try {
-			Thread.currentThread();
-			Thread.sleep(random.nextInt(1000));
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
 		synchronized (this.HTTP) {
 			if (this.HTTP.getPrimeiro() != null) {
