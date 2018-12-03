@@ -13,7 +13,6 @@ public class Data {
 	 }
 	 
 	 public void put(String s) {
-		 System.out.println(q);
 		 this.q.add(s);
 	 }
 	 public String take() {

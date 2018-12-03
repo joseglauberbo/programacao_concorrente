@@ -19,7 +19,7 @@ public class GeradorString implements Runnable {
 	        int ch = rand.nextInt (letras.length);
 	        sb.append (letras [ch]);
 	    }
-	    this.data.put(sb.toString());
+	   
 	    return sb.toString();    
 	}
 	
@@ -35,7 +35,8 @@ public class GeradorString implements Runnable {
                         this.data.wait();
                     } catch (InterruptedException e) { }
                 }
-                this.data.put(this.geraString());
+                String stringGerada = this.geraString();
+                this.data.put(stringGerada);
                 try {
         			Thread.currentThread();
         			Thread.sleep(1001);
