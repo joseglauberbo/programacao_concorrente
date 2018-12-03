@@ -23,9 +23,9 @@ public class Requester {
    
 	public void realizaChamada() {
 		while(this.inter.getCond()) {
-			System.out.println(this.reliableRequest());
+			System.out.println("Primeiro servidor a responder:" + this.reliableRequest());
 		} 
-		System.out.println("Condição de parada atingida.");
+		System.out.println("CondiÃ§ao de parada atingida.");
 		
 	}
 	

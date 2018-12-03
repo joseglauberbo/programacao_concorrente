@@ -30,14 +30,13 @@ public class Servidor implements Runnable{
 		try {
 			Thread.currentThread();
 			Thread.sleep(random.nextInt(1000));
-			synchronized (HTTP) {
-				HTTP.request(getNome());
+			synchronized (this.HTTP) {
+				this.HTTP.request(getNome());
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} 
-		//System.out.print("servidor: ");
-		//System.out.println();
+		
 		
 		
 	}

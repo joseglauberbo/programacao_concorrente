@@ -29,7 +29,7 @@ public class Servidor implements Runnable{
 	public void run() {
 		try {
 			Thread.currentThread();
-			Thread.sleep(random.nextInt(2100));
+			Thread.sleep(2100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} 
