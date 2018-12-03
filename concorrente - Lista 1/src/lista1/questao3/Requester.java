@@ -30,14 +30,15 @@ public class Requester {
     	long start = System.currentTimeMillis();
     	
     	this.createThread();
+    	
     	try {
 			Thread.currentThread();
-			Thread.sleep(random.nextInt(2000));
+			Thread.sleep(random.nextInt((int) System.nanoTime()));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+    	
 		long elapsed = System.currentTimeMillis() - start;
-		
 		
 		time = elapsed;
 		System.out.println(time);
@@ -46,7 +47,7 @@ public class Requester {
     
     public String retorno(String result, long time) {
     		
-    		if(time < 1500) {
+    		if(time < 2000) {
     			return result;
     		} else {
     			return "Erro: tempo ultrapassado";

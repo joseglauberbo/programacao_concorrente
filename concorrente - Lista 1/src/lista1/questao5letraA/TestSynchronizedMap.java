@@ -1,45 +1,44 @@
-package lista1.questao5;
+package lista1.questao5letraA;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SynchronizedMap {
-	public static Map<Integer, String> synchronizedMapObject = null;
-	public static ArrayList<Integer> bichos = new ArrayList<>();
-	public static void main(String[] args) throws InterruptedException {
-		
-		
-		for (int i = 1; i < 24; i++ ) {
-			for (int j = 1; j < i; j++) {
-				contaTempo(j);
-				System.out.println(bichos);
-			}
-			
-		}
-		
-		
-	}
+public class TestSynchronizedMap implements Runnable {
 
-	public static void contaTempo(int quanti) {
+	public static Map<Integer, String> synchronizedMapObject;
+	public static ArrayList<Integer> valores = new ArrayList<>();
+	private int quant;
+	
+	public TestSynchronizedMap(int quant) {
+		this.quant = quant;
+	}
+	
+	@Override
+	public void run() {
+
 		long tempoE = 0;
+		
 		for (int j = 0; j <= 5; j++) {
 
 			long startTime = System.nanoTime();
 			synchronizedMapObject = Collections.synchronizedMap(new HashMap<Integer, String>());
 
-			for (int i = 0; i < 10000/quanti; i++) {
+			for (int i = 0; i < 10000/quant; i++) {
 				synchronizedMapObject.put(i, "a" + i);
 				System.out.println(synchronizedMapObject.get(i));
 			}
+			
 			long entTime = System.nanoTime();
 			long totalTime = (entTime - startTime) / 1000000L;
 			tempoE += totalTime;
 			System.out.println(totalTime);
+		
+			valores.add((int) (tempoE/5));
+			System.out.println(valores);
 		}
-		bichos.add((int) (tempoE/5));
+		
 		System.out.println("Media: " + (tempoE/5));
 	}
-
 }
