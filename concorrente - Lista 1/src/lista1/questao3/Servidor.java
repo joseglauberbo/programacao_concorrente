@@ -36,6 +36,5 @@ public class Servidor implements Runnable{
 				System.out.println(this.HTTP.request(getNome()));
 			}
 		}
-
 	}
 }

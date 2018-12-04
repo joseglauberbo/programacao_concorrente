@@ -9,7 +9,6 @@ public class Main {
 		Requester req = new Requester(); 
 		
 		String result = req.reliableRequest();
-		//req.retorno(result, req.getTime());
 		System.out.println(req.retorno(result, req.getTime()));
 	}
 	

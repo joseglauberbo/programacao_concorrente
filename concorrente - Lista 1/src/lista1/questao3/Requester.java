@@ -33,7 +33,7 @@ public class Requester {
     	
     	try {
 			Thread.currentThread();
-			Thread.sleep(random.nextInt((int) System.nanoTime()));
+			Thread.sleep(random.nextInt(5000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
