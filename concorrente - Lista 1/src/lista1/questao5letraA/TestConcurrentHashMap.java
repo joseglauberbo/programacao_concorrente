@@ -1,4 +1,4 @@
-package lista1.questao5letraB;
+package lista1.questao5letraA;
 
 import java.util.ArrayList;
 import java.util.Map;
