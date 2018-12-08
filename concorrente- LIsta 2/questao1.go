@@ -1,36 +1,46 @@
 package main
 
-import "time"
-import "fmt"
-import "math/rand"
-var c1 = make(chan string)
-var c2 = make(chan string)
-var c3 = make(chan string)
+import ("time"
+        "fmt"
+        "math/rand"
+)
+
+var ( canal1 = make(chan string)
+      canal2 = make(chan string)
+      canal3 = make(chan string)
+)
+
 func main() {
     reliableRequest()
-   
-    
 }
+
 func reliableRequest(){
     
     // Cada canal receberá um valor depois de uma certa quantidade
     // de tempo, para simular e.x. o bloqueamento operações RPC
     // executando em goroutines simultâneas.    
     go func() {
-        var tempo int = rand.Intn(1)
+        r := rand.New(rand.NewSource(time.Now().UnixNano()))
+        var tempo = r.Intn(35)
         time.Sleep(time.Second * time.Duration(tempo))
         request("mirror1.com")
-        c1 <- "mirror1"
+        <- canal1
     }()
+
     go func() {
-        var tempo2 int = rand.Intn(1)
+        r := rand.New(rand.NewSource(time.Now().UnixNano()))
+        var tempo2 = r.Intn(35)
         time.Sleep(time.Second * time.Duration(tempo2))
-        c2 <- "mirror2"
+        request("mirror2.br")
+        <- canal2
     }()
+
     go func(){
-        var tempo3 int = rand.Intn(1)
+        r := rand.New(rand.NewSource(time.Now().UnixNano()))
+        var tempo3 = r.Intn(35)
         time.Sleep(time.Second * time.Duration(tempo3))
-        c2 <- "mirror3"
+        request("mirror3.edu")
+        <- canal3
     }()
 
 
@@ -38,17 +48,26 @@ func reliableRequest(){
     // simultâneamente, imprimindo cada um como ele chega.    
     
         select {
-        case msg1 := <-c1:
+          case msg1 := <-canal1:
             fmt.Println("Primeiro servidor a responder", msg1)
-        case msg2 := <-c2:
+          case msg2 := <-canal2:
             fmt.Println("Primeiro servidor a responder", msg2)
-        
-        case msg3 := <-c3:
+          case msg3 := <-canal3:
             fmt.Println("Primeiro servidor a responder", msg3)
    }
 }
 
 func request(serverName string) {
-
     
+    if serverName == "mirror1.com" {
+      canal1 <- "mirror1"
+    }
+
+    if serverName == "mirror2.br" {
+      canal2  <- "mirror2"
+    }
+
+    if serverName == "mirror3.edu" {
+      canal3 <- "mirror3"
+    }
 }
