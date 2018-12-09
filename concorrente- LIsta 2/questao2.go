@@ -45,28 +45,27 @@ func reliableRequest(){
         <- canal3
     }()
 
-
+    var msg string;
+    var tempoLimite time.Duration = 2 ;
     // Nós iremos utilizar o `select` para esperar esses valores
     // simultâneamente, imprimindo cada um como ele chega.    
     
         select {
           case msg1 := <-canal1:
-            canal4 <- "Primeiro servidor a responder mirror1.com" + msg1
-            <- canal4
+           msg = "Primeiro canal a chegar: " + msg1
           case msg2 := <-canal2:
-            canal4 <- "Primeiro servidor a responder mirror2.br" + msg2
-            <- canal4
+           msg = "Primeiro canal a chegar: " + msg2
           case msg3 := <-canal3:
-            canal4 <- "Primeiro servidor a responder mirror3.edu" + msg3
-            <- canal4
-   }
+           msg = "Primeiro canal a chegar: " + msg3
+        }
   
   took := time.Since(started)
+  fmt.Println(took)
 
-  if took >= 2 {
-    fmt.Println("Erro: Tempo de execução superior a dois segundos, igual à = ", took)
+  if took < tempoLimite {
+    fmt.Println(msg)
   } else {
-    fmt.Println(canal4)
+    fmt.Println("Erro: Tempo de execução superior a dois segundos, igual à = ", took)
   }
 }
 
