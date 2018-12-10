@@ -3,15 +3,27 @@ package main
 import ("time"
         "fmt"
         "math/rand"
+        "os"
 )
 
 var ( canal1 = make(chan string)
       canal2 = make(chan string)
       canal3 = make(chan string)
+      done = make(chan interface{})
 )
 
 func main() {
-    repetir()
+
+	go killer(done)
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	var number = r.Intn(15)
+
+  for i := 0; i < number; i++ {
+		go reliableRequest()
+	}
+
+  time.Sleep(1 * time.Minute)
 }
 
 func reliableRequest(){
@@ -21,7 +33,7 @@ func reliableRequest(){
     // executando em goroutines simultâneas.    
     go func() {
         r := rand.New(rand.NewSource(time.Now().UnixNano()))
-        var tempo = r.Intn(10)
+        var tempo = r.Intn(15)
         time.Sleep(time.Second * time.Duration(tempo))
         request("mirror1.com")
         <- canal1
@@ -29,7 +41,7 @@ func reliableRequest(){
 
     go func() {
         r := rand.New(rand.NewSource(time.Now().UnixNano()))
-        var tempo2 = r.Intn(10)
+        var tempo2 = r.Intn(15)
         time.Sleep(time.Second * time.Duration(tempo2))
         request("mirror2.br")
         <- canal2
@@ -37,7 +49,7 @@ func reliableRequest(){
 
     go func(){
         r := rand.New(rand.NewSource(time.Now().UnixNano()))
-        var tempo3 = r.Intn(10)
+        var tempo3 = r.Intn(15)
         time.Sleep(time.Second * time.Duration(tempo3))
         request("mirror3.edu")
         <- canal3
@@ -54,7 +66,11 @@ func reliableRequest(){
             fmt.Println("Primeiro servidor a responder", msg2)
           case msg3 := <-canal3:
             fmt.Println("Primeiro servidor a responder", msg3)
-   }
+          case <-done:
+			      return
+            
+          time.Sleep(2 * time.Minute)
+        }
 }
 
 func request(serverName string) {
@@ -70,10 +86,13 @@ func request(serverName string) {
     if serverName == "mirror3.edu" {
       canal3 <- "mirror3"
     }
+
+    done <- true
 }
 
-func repetir() {
-  for {
-    reliableRequest()
-  }
+func killer(done chan interface{}) {
+
+  os.Stdin.Read(make([]byte, 1))
+	close(done)
+
 }
