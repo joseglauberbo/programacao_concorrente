@@ -18,6 +18,7 @@ func main() {
 func reliableRequest(){
     
     started := time.Now()
+    
     // Cada canal receberá um valor depois de uma certa quantidade
     // de tempo, para simular e.x. o bloqueamento operações RPC
     // executando em goroutines simultâneas.    
@@ -46,7 +47,7 @@ func reliableRequest(){
     }()
 
     var msg string;
-    var tempoLimite time.Duration = 2 ;
+
     // Nós iremos utilizar o `select` para esperar esses valores
     // simultâneamente, imprimindo cada um como ele chega.    
     
@@ -59,14 +60,15 @@ func reliableRequest(){
            msg = "Primeiro canal a chegar: " + msg3
         }
   
-  took := time.Since(started)
+  took := time.Since(started).Seconds()
   fmt.Println(took)
 
-  if took < tempoLimite {
+  if took < 2 {
     fmt.Println(msg)
   } else {
     fmt.Println("Erro: Tempo de execução superior a dois segundos, igual à = ", took)
   }
+
 }
 
 func request(serverName string) {
