@@ -8,7 +8,6 @@ import ("time"
 var ( canal1 = make(chan string)
       canal2 = make(chan string)
       canal3 = make(chan string)
-      canal4 = make(chan string)
 )
 
 func main() {
