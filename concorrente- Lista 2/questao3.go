@@ -75,6 +75,8 @@ func reliableRequest(){
 
 func request(serverName string) {
     
+    done <- "apenas p dizer q o programa pode ser cancelado"
+
     if serverName == "mirror1.com" {
       canal1 <- "mirror1"
     }
@@ -87,7 +89,6 @@ func request(serverName string) {
       canal3 <- "mirror3"
     }
 
-    done <- true
 }
 
 func killer(done chan interface{}) {
