@@ -19,18 +19,15 @@ func main() {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	var number = r.Intn(15)
 
-  for i := 0; i < number; i++ {
+  	for i := 0; i < number; i++ {
 		go reliableRequest()
 	}
 
-  time.Sleep(1 * time.Minute)
+  	time.Sleep(1 * time.Minute)
 }
 
 func reliableRequest(){
-    
-    // Cada canal receberá um valor depois de uma certa quantidade
-    // de tempo, para simular e.x. o bloqueamento operações RPC
-    // executando em goroutines simultâneas.    
+      
     go func() {
         r := rand.New(rand.NewSource(time.Now().UnixNano()))
         var tempo = r.Intn(15)
@@ -55,10 +52,6 @@ func reliableRequest(){
         <- canal3
     }()
 
-
-    // Nós iremos utilizar o `select` para esperar esses valores
-    // simultâneamente, imprimindo cada um como ele chega.    
-    
         select {
           case msg1 := <-canal1:
             fmt.Println("Primeiro servidor a responder", msg1)
@@ -93,7 +86,7 @@ func request(serverName string) {
 
 func killer(done chan interface{}) {
 
-  os.Stdin.Read(make([]byte, 1))
+  	os.Stdin.Read(make([]byte, 1))
 	close(done)
-
+	
 }
