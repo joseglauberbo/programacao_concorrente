@@ -18,10 +18,7 @@ func main() {
 func reliableRequest(){
     
     started := time.Now()
-    
-    // Cada canal receberá um valor depois de uma certa quantidade
-    // de tempo, para simular e.x. o bloqueamento operações RPC
-    // executando em goroutines simultâneas.    
+   
     go func() {
         r := rand.New(rand.NewSource(time.Now().UnixNano()))
         var tempo = r.Intn(10)
@@ -47,9 +44,6 @@ func reliableRequest(){
     }()
 
     var msg string;
-
-    // Nós iremos utilizar o `select` para esperar esses valores
-    // simultâneamente, imprimindo cada um como ele chega.    
     
         select {
           case msg1 := <-canal1:
