@@ -10,9 +10,11 @@ func main() {
 
      var overall [][]int
      a := make([]int, 0, 999999)
+     //b := make([]int, 0, 999999)
+    // c := make([]int, 0, 999999)
      overall = append(overall, a)
-
-   
+    //overall = append(overall, b)
+    // overall = append(overall, c)
      time.Sleep(time.Second)
     
 
